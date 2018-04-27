@@ -1,27 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package clientprueba;
 
-/**
- *
- * @author curso
- */
+package Client;
+
 
 import java.net.*;
-
- 
-
 import java.io.*;
 
- 
-
-
- 
-
-public class client {
+public class Client {
     final String HOST = "localhost";
     final int PUERTO=5000;
     Socket sc;
