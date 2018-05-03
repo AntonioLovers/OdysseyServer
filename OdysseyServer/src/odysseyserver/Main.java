@@ -2,11 +2,11 @@
 package odysseyserver;
 
 //import Server.Server;
-import java.io.BufferedReader;
+//import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
+//import java.io.InputStreamReader;
 import java.net.*;
 
 /**
@@ -20,8 +20,9 @@ public class Main {
         
 //        Server server = new Server();
 //        server.initServer();
-          
+          System.out.println(Inet4Address.getLocalHost().getHostAddress());
           ServerSocket server = new ServerSocket(3000);
+          
           System.out.println("Waiting client...");
           Socket socket = server.accept();
           
