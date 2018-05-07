@@ -1,6 +1,9 @@
 
 package Manager;
 
+import Ussers.Usser;
+import java.io.File;
+
 /**
  *
  * @author daniel
@@ -16,6 +19,16 @@ public class Manager {
         return "";
     }
     public void singIn(String usser , String password){
+        
+        
+        if(new File(usser).exists()){
+            
+            Usser u = new Usser(usser);
+            File fjson = new File(usser);
+            
+        }else{
+            System.out.println("Ese usuario no existe, debes crear una cuenta!");
+        }
         
     }
     public void addUser(String nick ,String name ,String last, int age ,
