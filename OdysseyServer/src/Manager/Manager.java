@@ -2,7 +2,12 @@
 package Manager;
 
 import Ussers.Usser;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import org.json.JSONObject;
 
 /**
  *
@@ -18,12 +23,15 @@ public class Manager {
     public String sort(String code){
         return "";
     }
-    public void singIn(String usser , String password){
+    public void singIn(String usser , String password) throws FileNotFoundException, IOException{
         
-        
-        if(new File(usser).exists()){
+        File f = new File(usser);
+        if(f.exists()){
+            BufferedReader br;
+            br = new BufferedReader(new FileReader(usser+"//DataJson"));
+            String json = br.readLine();
             
-            Usser u = new Usser(usser);
+//            Usser u = new Usser();
             File fjson = new File(usser);
             
         }else{

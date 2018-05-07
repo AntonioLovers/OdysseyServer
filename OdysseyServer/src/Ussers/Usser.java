@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Ussers;
 
-import com.google.gson.Gson;
 import org.json.JSONObject;
 
 
@@ -15,13 +10,15 @@ import org.json.JSONObject;
  */
 public class Usser {
     private String id;
-    public Usser(String id){
+    private JSONObject usserJson;
+    
+    public Usser(String name){
         this.id = id;
-        Gson g = new Gson();    
+        usserJson = new JSONObject();    
     }
     
     public void init(JSONObject json){
-        for(int i = 0; i<json.length();i++){
+        for(int i = 0; i<usserJson.length();i++){
             
         }
         
