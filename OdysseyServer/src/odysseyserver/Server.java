@@ -8,7 +8,8 @@ package odysseyserver;
 //import Server.Server;
 import ADT.BinarySearch_Tree;
 import ADT.User;
-import Users.logu;
+import Receivers.logu;
+import Receivers.usuario;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataOutputStream;
@@ -70,42 +71,77 @@ public class Server implements Runnable {
                     //LEYENDO BYTES DEL MENSAJE CLIENTE 
                     InputStream in = socket.getInputStream();
                     message = readMessage(in);  
-                    System.out.println(message);
+                    
                                                      
                     switch(message){
+                        
+                        //FUNCION LOGIN
                         case "login":
+                            message = "";
                             output.writeUTF("send");
                             InputStream loginInput = socket.getInputStream();
-                           
-                            
-                            
+
                             logu code = JAXB.unmarshal(new StringReader(readMessage(loginInput)), logu.class);
                             
                             
                             if(usersTree.contains(code.getName())){
                                 User p = usersTree.getUser(code.getName());
                                 if(p.getPassword().equals(code.getPassWord())){
-                                    currentUser = p;
-                                    System.out.println("true");
+                                    this.currentUser = usersTree.getUser(code.getName());
+                                    System.out.println("login>true");
                                     
                                     output.writeUTF("true");}else{
-                                    System.out.println("false");
+                                    System.out.println("login>false");
                                     output.writeUTF("false");
                                 }
                                 }
 
                             else{
-                                System.out.println("false");
+                                System.out.println("login>false");
                                 output.writeUTF("false");
-                            break;}
+                            }break;
+                        case "verify":
+                            message = "";
+                            output.writeUTF("send");
+                            InputStream veryfyInput = socket.getInputStream();
+                            String verifymessage = readMessage(veryfyInput);
+                            if(usersTree.contains(verifymessage)){
+                                System.out.println("verify>false");
+                                output.writeUTF("false");
+                                break;
+                            }else{
+                                System.out.println("verify>true");
+                                output.writeUTF("true");
+                                break;
+                            }
+                            
+                        case "signup":
+                            message = "";
+                            output.writeUTF("send");
+                            System.out.println("signup>send");
+                            
+                            InputStream singupInput = socket.getInputStream();
+                            
+                            usuario us = JAXB.unmarshal(new StringReader(readMessage(singupInput)), usuario.class); 
+                            
+                            usersTree.insert(us.getUserName(), us.getPassWord(), 
+                                    us.getAge(), us.getName(), us.getLastName(), 
+                                    us.getGenres(), us.getFriends());
+
+                            break;
+
+                            
+                            
+                            
                         default:
+                            message = "";
                             System.out.println("false");
                             output.writeUTF("false");
                             break;
                     }                    
                     
                     
-                    message = "";
+
                     
 
                 } } catch (UnknownHostException ex) {
@@ -125,6 +161,35 @@ public class Server implements Runnable {
                     String ussers = usersTree.getResult();
                     print.write(ussers);
                     print.close();
+                    
+                    String b []= ussers.split("@");
+                    for(int i =0;i<ussers.length();i++){
+                        
+                        File userFile = new File(pathUsers+b[i]);
+                        userFile.mkdir();
+                        
+                        try (BufferedWriter bw = new BufferedWriter(
+                                                 new FileWriter(
+                                                 new File(pathUsers+b[i]+"\\DataJson.txt")))){
+                            
+                            User uu = usersTree.getUser(b[i]);
+                            JSONObject jj = new JSONObject();
+
+                            jj.put("id",uu.getId());
+                            jj.put("password",uu.getPassword());
+                            jj.put("age",uu.getAge());
+                            jj.put("name",uu.getName());
+                            jj.put("lastname",uu.getLastName());
+                            jj.put("genres",uu.getfGnres());
+                            jj.put("friends",uu.getFriends());
+                            bw.write(jj.toString());
+                        } catch (JSONException ex) {
+                            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                       
+                        
+                    }
+                    
                 } catch (IOException ex) {
                     Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -167,9 +232,9 @@ public class Server implements Runnable {
                                      json.getString("password"), 
                                      json.getInt("age"), 
                                      json.getString("name"), 
-                                     json.getString("lastName"), 
+                                     json.getString("lastname"), 
                                      json.getString("friends"), 
-                                     json.getString("gnres"));
+                                     json.getString("genres"));
              }
         
         

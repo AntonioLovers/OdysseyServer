@@ -4,9 +4,11 @@ package odysseyserver;
 import ADT.BinarySearch_Tree;
 import ADT.User;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import org.json.JSONException;
+import org.json.JSONObject;
 /**
  *
  * @author daniel
@@ -22,10 +24,18 @@ public class Main {
 
 //        String pathUsers = "C:\\Users\\Daniel\\Desktop\\PROGRAMACION\\JAVA\\"
 //                + "PROYECTOS2018\\Odyssey\\OdysseyServer\\Users\\";
+//        File f = new File(pathUsers+"directorio");
+//        f.mkdir();
+//        
 //                BufferedReader reader = new BufferedReader(
 //                                        new FileReader(pathUsers+"DaniC"+"\\DataJson.txt"));
 //                String json = reader.readLine();
 //                System.out.println(json);
+//            JSONObject json = new JSONObject();
+//            json.put("id","Garza");
+//            json.put("age",18);
+//            json.put("pass","meme22112");
+//            System.out.println(json.toString());
             
             
 
