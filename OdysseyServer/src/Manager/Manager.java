@@ -1,13 +1,11 @@
 
 package Manager;
 
-import Ussers.Usser;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import org.json.JSONObject;
 
 /**
  *
@@ -31,7 +29,7 @@ public class Manager {
             br = new BufferedReader(new FileReader(usser+"//DataJson"));
             String json = br.readLine();
             
-//            Usser u = new Usser();
+//            User u = new User();
             File fjson = new File(usser);
             
         }else{
@@ -46,7 +44,7 @@ public class Manager {
    public void addSong(){
        
    }
-   public void deleteSong(String usser , String name){
+   public void deleteSong(String user , String name){
        
    }
    public void playSong(){
@@ -67,10 +65,10 @@ public class Manager {
    public void addFriend(){
        
    }
-   public void recommendSong(String usser , String name){
+   public void recommendSong(String user , String name){
        
    }
-   public void qualifySong(String usser , String name){
+   public void qualifySong(String user , String name){
        
    }
    

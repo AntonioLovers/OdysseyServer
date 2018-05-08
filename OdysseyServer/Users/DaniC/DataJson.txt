@@ -1,0 +1,1 @@
+{"id":"DaniC","password":"pene01","age":18,"name":"Daniel","lastName":"Camacho","friends":"Daniel","gnres":"Rock"}
