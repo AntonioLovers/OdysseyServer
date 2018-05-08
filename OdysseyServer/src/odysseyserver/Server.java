@@ -126,7 +126,7 @@ public class Server implements Runnable {
                             
                             usersTree.insert(us.getUserName(), us.getPassWord(), 
                                     us.getAge(), us.getName(), us.getLastName(), 
-                                    us.getGenres(), us.getFriends());
+                                    us.getFriends(), us.getGenres());
 
                             break;
 
@@ -163,7 +163,7 @@ public class Server implements Runnable {
                     print.close();
                     
                     String b []= ussers.split("@");
-                    for(int i =0;i<ussers.length();i++){
+                    for(int i =0;i<b.length;i++){
                         
                         File userFile = new File(pathUsers+b[i]);
                         userFile.mkdir();
