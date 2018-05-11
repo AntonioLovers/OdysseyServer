@@ -12,13 +12,14 @@ public class BinarySearch_Tree {
 	 */
 	private int size;
 	private User root;
-        private String result;
+        private String result,inorder;
 	/**
 	 * Constructor del árbol le da valor nulo a la raíz
 	 */
 	public BinarySearch_Tree() {
 		this.root = null;	
                 this.result = "";
+                this.inorder = "";
 	}
 	/**
 	 * Busca el menor valor del árbol
@@ -292,6 +293,18 @@ public class BinarySearch_Tree {
                 cont+= (byte)id.charAt(i);   
             }return cont;               
         } 
+        public String getInorder(){
+            this.Inorder(root);
+            return this.inorder;
+        }
+        public void Inorder(User root){
+		if(root != null) {
+                        
+			Inorder(root.getLeft());
+                        inorder+= root.getId()+"@";
+			Inorder(root.getRight());
+		}              
+        }
         
         /**
          * Llama al metodo print de la clase BTreePrinter

@@ -17,9 +17,9 @@ public class Main {
         
 
     public static void main(String[] args) throws IOException, JSONException {
-        Server server =  new Server();
-        server.init();
-        server.run();  
+//        Server server =  new Server();
+//        server.init();
+//        server.run();  
 
 
 //        String pathUsers = "C:\\Users\\Daniel\\Desktop\\PROGRAMACION\\JAVA\\"
@@ -40,13 +40,16 @@ public class Main {
             
 
 
-//          BinarySearch_Tree tree = new BinarySearch_Tree();
-//          tree.insert("ana", "1234", 18, "daniel", "garcia", "daniel", "rock");
-//          tree.insert("aan", "1234", 18, "daniel", "garcia", "daniel", "rock");
-//          tree.insert("melany", "1234", 18, "daniel", "garcia", "daniel", "rock");
-//          tree.insert("naa", "1234", 18, "daniel", "garcia", "daniel", "rock");
-//          tree.insert("zzzzzz", "1234", 18, "daniel", "garcia", "daniel", "rock");
-//          String result = tree.getResult();
+          BinarySearch_Tree tree = new BinarySearch_Tree();
+          tree.insert("ana", "1234", 18, "daniel", "garcia", "daniel", "rock");
+          tree.insert("aan", "1234", 18, "daniel", "garcia", "daniel", "rock");
+          tree.insert("melany", "1234", 18, "daniel", "garcia", "daniel", "rock");
+          tree.insert("naa", "1234", 18, "daniel", "garcia", "daniel", "rock");
+          tree.insert("zzzzzz", "1234", 18, "daniel", "garcia", "daniel", "rock");
+          tree.see();
+          System.out.println(tree.getInorder());
+          System.out.println(tree.getResult());
+
 //    
 //          
 //          String b []= result.split("@");
