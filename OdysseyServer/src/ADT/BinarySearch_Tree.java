@@ -294,8 +294,10 @@ public class BinarySearch_Tree {
             }return cont;               
         } 
         public String getInorder(){
+            inorder = "";
             this.Inorder(root);
-            return this.inorder;
+            String ii =inorder.substring(0, inorder.length()-1);
+            return ii;
         }
         public void Inorder(User root){
 		if(root != null) {
@@ -315,8 +317,10 @@ public class BinarySearch_Tree {
         }
         
         public String getResult(){
+            result ="";
             this.createUserList(root);
-            return this.result;
+            String rr = result.substring(0, result.length()-1);
+            return rr;
         }
         private void createUserList(User u){
                 

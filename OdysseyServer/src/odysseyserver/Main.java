@@ -3,6 +3,8 @@ package odysseyserver;
 
 import ADT.BinarySearch_Tree;
 import ADT.User;
+import Receivers.song;
+import com.thoughtworks.xstream.XStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -17,9 +19,18 @@ public class Main {
         
 
     public static void main(String[] args) throws IOException, JSONException {
-//        Server server =  new Server();
-//        server.init();
-//        server.run();  
+        Server server =  new Server();
+        server.init();
+        server.run();  
+          
+
+//
+//          song s = new song("bytes", "gods plan", "drake", "no c bro", 2017, "she said do you love me?", "house");
+//          XStream xstream = new XStream();
+//          xstream.autodetectAnnotations(Boolean.TRUE);
+//          System.out.println(xstream.toXML(s));
+          
+          
 
 
 //        String pathUsers = "C:\\Users\\Daniel\\Desktop\\PROGRAMACION\\JAVA\\"
@@ -40,15 +51,15 @@ public class Main {
             
 
 
-          BinarySearch_Tree tree = new BinarySearch_Tree();
-          tree.insert("ana", "1234", 18, "daniel", "garcia", "daniel", "rock");
-          tree.insert("aan", "1234", 18, "daniel", "garcia", "daniel", "rock");
-          tree.insert("melany", "1234", 18, "daniel", "garcia", "daniel", "rock");
-          tree.insert("naa", "1234", 18, "daniel", "garcia", "daniel", "rock");
-          tree.insert("zzzzzz", "1234", 18, "daniel", "garcia", "daniel", "rock");
-          tree.see();
-          System.out.println(tree.getInorder());
-          System.out.println(tree.getResult());
+//          BinarySearch_Tree tree = new BinarySearch_Tree();
+//          tree.insert("ana", "1234", 18, "daniel", "garcia", "daniel", "rock");
+//          tree.insert("aan", "1234", 18, "daniel", "garcia", "daniel", "rock");
+//          tree.insert("melany", "1234", 18, "daniel", "garcia", "daniel", "rock");
+//          tree.insert("naa", "1234", 18, "daniel", "garcia", "daniel", "rock");
+//          tree.insert("zzzzzz", "1234", 18, "daniel", "garcia", "daniel", "rock");
+//          tree.see();
+//          System.out.println(tree.getInorder());
+//          System.out.println(tree.getResult());
 
 //    
 //          

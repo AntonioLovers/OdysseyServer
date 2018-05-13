@@ -100,9 +100,19 @@ public class Server implements Runnable {
                                 System.out.println("login>false");
                                 output.writeUTF("false");
                             }break;
+                        case "register":
+                            
+                            output.writeUTF("("+usersTree.getResult()+")");
+                            usersTree.see();
+                            System.out.println(usersTree.getResult());
+                            break;
+                            
                         case "verify":
                             message = "";
                             output.writeUTF("send");
+                            
+
+                            
                             InputStream veryfyInput = socket.getInputStream();
                             String verifymessage = readMessage(veryfyInput);
                             if(usersTree.contains(verifymessage)){
@@ -127,6 +137,7 @@ public class Server implements Runnable {
                             usersTree.insert(us.getUserName(), us.getPassWord(), 
                                     us.getAge(), us.getName(), us.getLastName(), 
                                     us.getFriends(), us.getGenres());
+                            saveInDisc();
 
                             break;
 
@@ -135,14 +146,12 @@ public class Server implements Runnable {
                             
                         default:
                             message = "";
-                            System.out.println("false");
+                            System.out.println("Default>false");
                             output.writeUTF("false");
                             break;
                     }                    
                     
-                    
-
-                    
+                                     
 
                 } } catch (UnknownHostException ex) {
                                 Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
@@ -150,7 +159,49 @@ public class Server implements Runnable {
                                 Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
                             }
             
-            finally{
+    }
+
+       
+    public String readMessage(InputStream in) throws IOException{
+                    String inputMessage = "";
+                    byte [] data = new byte[1645];                    
+                    int cont = in.read(data);
+                    for(int i = 0 ; i< cont;i++){
+                        inputMessage += (char)data[i];
+                    }
+                    
+                    inputMessage= inputMessage.replaceAll("[\r\n]+ ","");   
+                    System.out.println(inputMessage); 
+                    return inputMessage;
+    }
+    public void init() throws FileNotFoundException, IOException, JSONException{
+
+        
+             BufferedReader r = new BufferedReader(
+                                new FileReader(pathUsers+"UsersList.txt"));
+             
+             String ussers = r.readLine();
+             String b []= ussers.split("@");       
+             for(int i =0; i<b.length; i++){
+                BufferedReader reader = new BufferedReader(
+                                        new FileReader(pathUsers+b[i]+"\\DataJson.txt"));
+                JSONObject json = new JSONObject(reader.readLine());
+                
+                usersTree.insert(json.getString("id"), 
+                                     json.getString("password"), 
+                                     json.getInt("age"), 
+                                     json.getString("name"), 
+                                     json.getString("lastname"), 
+                                     json.getString("friends"), 
+                                     json.getString("genres"));
+             }
+        
+        
+        
+    }
+    
+    
+            public void saveInDisc(){
                 try {
                     PrintWriter print = new PrintWriter(
                                         new BufferedWriter(
@@ -197,49 +248,7 @@ public class Server implements Runnable {
              
              
              
-            }
- 
-    }
-
-    
-    
-    public String readMessage(InputStream in) throws IOException{
-                    String inputMessage = "";
-                    byte [] data = new byte[1645];                    
-                    int cont = in.read(data);
-                    for(int i = 0 ; i< cont;i++){
-                        inputMessage += (char)data[i];
-                    }
-                    
-                    inputMessage= inputMessage.replaceAll("[\r\n]+ ","");   
-                    System.out.println(inputMessage); 
-                    return inputMessage;
-    }
-    public void init() throws FileNotFoundException, IOException, JSONException{
-
-        
-             BufferedReader r = new BufferedReader(
-                                new FileReader(pathUsers+"UsersList.txt"));
-             
-             String ussers = r.readLine();
-             String b []= ussers.split("@");       
-             for(int i =0; i<b.length; i++){
-                BufferedReader reader = new BufferedReader(
-                                        new FileReader(pathUsers+b[i]+"\\DataJson.txt"));
-                JSONObject json = new JSONObject(reader.readLine());
-                
-                usersTree.insert(json.getString("id"), 
-                                     json.getString("password"), 
-                                     json.getInt("age"), 
-                                     json.getString("name"), 
-                                     json.getString("lastname"), 
-                                     json.getString("friends"), 
-                                     json.getString("genres"));
-             }
-        
-        
-        
-    }
+            }    
             
     
 }
