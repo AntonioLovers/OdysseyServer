@@ -140,6 +140,32 @@ public class Server implements Runnable {
                             saveInDisc();
 
                             break;
+                            
+                        case "addSong":
+                            int cont = 0;
+                            message = "";
+                            output.writeUTF("send");
+                            
+                            String chunks = "";
+                            
+                            InputStream addSongInput = socket.getInputStream();
+                            chunks += readMessage(addSongInput);
+                            
+                            while(addSongInput.available() != 0 ){
+                                
+                                
+                                String part = readMessage(addSongInput);
+                                System.out.println(cont);
+                                System.out.println(part);
+                                
+                                chunks += part;
+                                cont++;
+                                addSongInput = socket.getInputStream();
+                                
+                            } 
+                            chunks = chunks.substring(chunks.indexOf("<"),chunks.lastIndexOf(">")+1);
+                            Song song = JAXB.unmarshal(new StringReader(chunks),Song.class);
+                            break;
 
                             
                             
@@ -164,14 +190,14 @@ public class Server implements Runnable {
        
     public String readMessage(InputStream in) throws IOException{
                     String inputMessage = "";
-                    byte [] data = new byte[1645];                    
+                    byte [] data = new byte[10000];                    
                     int cont = in.read(data);
                     for(int i = 0 ; i< cont;i++){
                         inputMessage += (char)data[i];
                     }
                     
                     inputMessage= inputMessage.replaceAll("[\r\n]+ ","");   
-                    System.out.println(inputMessage); 
+                    
                     return inputMessage;
     }
     public void init() throws FileNotFoundException, IOException, JSONException{

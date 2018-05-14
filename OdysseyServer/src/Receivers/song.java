@@ -54,61 +54,61 @@ public class song {
         this.letraR = letra;
         this.generoR = genero;
     }
-
-    public String getGeneroR() {
+    @XmlElement
+    public String getGenero() {
         return generoR;
     }
 
-    public void setGeneroR(String generoR) {
-        this.generoR = generoR;
+    public void setGeneroR(String genero) {
+        this.generoR = genero;
     }
-
-    public String getNameR() {
+    @XmlElement
+    public String getName() {
         return nameR;
     }
 
-    public void setNameR(String nameR) {
-        this.nameR = nameR;
+    public void setName(String name) {
+        this.nameR = name;
     }
-
-    public String getSongR() {
+    @XmlElement
+    public String getSong() {
         return songR;
     }
 
-    public void setSongR(String songR) {
-        this.songR = songR;
+    public void setSongR(String song) {
+        this.songR = song;
     }
-
-    public String getArtistR() {
+    @XmlElement
+    public String getArtist() {
         return artistR;
     }
 
-    public void setArtistR(String artistR) {
-        this.artistR = artistR;
+    public void setArtist(String artist) {
+        this.artistR = artist;
     }
-
-    public String getAlbumR() {
+    @XmlElement
+    public String getAlbum() {
         return albumR;
     }
 
-    public void setAlbumR(String albumR) {
-        this.albumR = albumR;
+    public void setAlbum(String album) {
+        this.albumR = album;
     }
-
-    public int getAgeR() {
+    @XmlElement
+    public int getAge() {
         return ageR;
     }
 
-    public void setAgeR(int ageR) {
-        this.ageR = ageR;
+    public void setAge(int age) {
+        this.ageR = age;
     }
-
-    public String getLetraR() {
+    @XmlElement
+    public String getLetra() {
         return letraR;
     }
 
-    public void setLetraR(String letraR) {
-        this.letraR = letraR;
+    public void setLetra(String letra) {
+        this.letraR = letra;
     }
     
 }
