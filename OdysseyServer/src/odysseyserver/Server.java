@@ -11,10 +11,12 @@ import ADT.User;
 import Receivers.Song;
 import Receivers.logu;
 import Receivers.usuario;
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -227,65 +229,38 @@ public class Server implements Runnable {
                             output.writeUTF("send");
                             
                             InputStream playInput = socket.getInputStream();
-//                            byte[] data = new byte[12002];
                             
-//                            String bit64 = currentUser.getSongsList().getNode("Wish You Were Here").getSong();
-                            
-                            
-                             BufferedReader rr = new BufferedReader(
-                                 new FileReader(pathUsers+"/"+"chunks"));  
-                
-                             
-                            String bit64 = rr.readLine();
-                            byte[] bit64bytes = bit64.getBytes();
-                            int min = 0;
-                           
-                            boolean flag = true;
-                            
-                            while(true){
 
-                                String mierda = readMessage(playInput);
+                            
+                            File file = new File(pathUsers+"/Dan/cancion");
+                            
+                            if(readMessage(playInput).equals("len")){
+                                output.writeUTF( String.valueOf(file.length())   );
+                            }                              
+                            
+                            
+                            
+                            
+                            
+                            InputStream fileInput = new FileInputStream(file);
+                            
+                            BufferedInputStream bf = new BufferedInputStream(fileInput);
+                            
+                            byte[] nuevo = new byte [12002];
+                            
+      
+                            int byteread = 0;
+                            int cc = 0;
+                            while(( byteread = fileInput.read(nuevo,0,nuevo.length) ) != -1  ){
                                 
-                                if(mierda.equals("chunk")){
-                                    
-                                    if(flag){
-                                        
-                                    byte[] part = new byte [12003];
-                                       
-                                    if(bit64bytes.length < 12002)
-                                    {
-                                            
-                                        System.arraycopy(bit64bytes, 0, part, 0, bit64bytes.length);
-                                        flag = false;
-                                    
-                                    }
-                                    else if((bit64bytes.length-min) < 12002){
-                                        
-                       
-                                        System.arraycopy(bit64bytes, min, part, 0, bit64bytes.length-min);
-                                        flag = false;
-                                        
-                                                                            
-                                    }
-                                    else{
-
-                                        System.arraycopy(bit64bytes, min, part, 0, 12002);
-                                        min += 12002;
-                                                                              
-                                    }
-                                    output.write(part,0,part.length);
-                                    
-                                    }else{
-                                        output.writeUTF("false");
-                                    }
-                                    
-
-                                    
-                                }else if(readMessage(playInput) == "finish"){
-                                    break;
-                                }
-                                playInput = socket.getInputStream();
+//                                String mierda = readMessage(playInput);
                                 
+//                                if(mierda.equals("chunk")){
+                                    System.out.println(cc);
+                                    output.write(nuevo,0,byteread);
+                                    cc++;
+//                                }
+                               
                                 
                             }
                             break;
