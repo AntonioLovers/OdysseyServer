@@ -1,0 +1,1 @@
+{"password":"22112","genres":"Blackman1501@MachoPingasuelta","name":"Daniel","id":"Garza","age":18,"friends":"Pop@Classic@Electronic","lastname":"Garcia Fallas"}

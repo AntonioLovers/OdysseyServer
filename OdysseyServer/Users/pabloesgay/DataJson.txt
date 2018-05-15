@@ -1,0 +1,1 @@
+{"password":"pablitobonito","genres":"Rock@Rap@Latin","name":"pablo","id":"pabloesgay","age":20,"friends":"MachoPingasuelta@Canalesmamapingas@Tortuloca","lastname":"mora"}

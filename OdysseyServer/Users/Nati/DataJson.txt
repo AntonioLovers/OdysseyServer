@@ -1,0 +1,1 @@
+{"password":"nati0807","genres":"Rock@Pop@Electronic","name":"Natalia","id":"Nati","age":15,"friends":"DaniC@Dan@Garza@Pablito@pabloesgay@Antonio","lastname":"Quesada"}
