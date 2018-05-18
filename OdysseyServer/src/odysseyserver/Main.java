@@ -27,6 +27,34 @@ public class Main {
         Server server =  new Server();
         server.init();
         server.run();  
+//
+//         JSONObject finalJson = new JSONObject();
+//         JSONObject listj = new JSONObject();
+//         JSONObject song = new JSONObject();
+         
+//        song.put("song","asdasda");
+//        song.put("title","hola");
+//        song.put("artist","holi");
+//        song.put("album","ll");
+//        song.put("year",20);
+//        song.put("lyrics","ola");
+//        song.put("genre","dani");
+//        
+//        
+//        
+//        listj.put("song1", song.toString());
+//        finalJson.put("SONGS", listj.toString());
+//        System.out.println(finalJson.toString());
+//        
+//        JSONObject recive = new JSONObject(finalJson.toString());
+//        JSONObject recivelist = new JSONObject(recive.getString("SONGS"));
+//        JSONObject finalrecive = new JSONObject(recivelist.getString("song1"));
+//        
+//        System.out.println(finalrecive.getString("song"));
+        
+         
+
+        
         
 //        File f = new File("Users","newFile");
 //        f.mkdir();

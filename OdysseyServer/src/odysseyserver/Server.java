@@ -54,7 +54,7 @@ public class Server implements Runnable {
         this.pathUsers = "Users";
         
         this.usersTree = new BinarySearch_Tree();
-        this.large = 10001;
+        this.large = 20001;
     }    
 
     @Override
@@ -102,7 +102,23 @@ public class Server implements Runnable {
                                     this.currentUser = usersTree.getUser(code.getName());
                                     System.out.println("login>true");
                                     
-                                    output.writeUTF("true");}else{
+                                    output.writeUTF("true");
+                                    loginInput = socket.getInputStream();
+                                    
+                                    if(readMessage(loginInput).equals("list")){
+                                        String send = "*";
+                                        Song temp = currentUser.getSongsList().getHead();
+                                        
+                                        
+                                        while(temp.getNext()!=null){
+                                            send+=temp.getTitle()+"@"+temp.getArtist()+"@"+temp.getAlbum()+"/";
+                                            temp = temp.getNext();
+                                        } send+=temp.getTitle()+"@"+temp.getArtist()+"@"+temp.getAlbum();
+                                        output.writeUTF(send);
+                                        
+                                    }
+                                
+                                }else{
                                     System.out.println("login>false");
                                     output.writeUTF("false");
                                 }
@@ -164,7 +180,7 @@ public class Server implements Runnable {
                             InputStream addSongInput = socket.getInputStream();
                             chunks += readMessage(addSongInput);
                             
-                            while(addSongInput.available() != 0 ){
+                            while(true ){
                                 
                                 String part = readMessage(addSongInput);
                                 System.out.println(part);
@@ -208,59 +224,58 @@ public class Server implements Runnable {
 //                            System.out.println(song.getLetra());
 //                            System.out.println(song.getGenre());
                             saveInDisc();
-                            File f =  new File("chunks");
-                            BufferedWriter bw = new BufferedWriter(
-                                                 new FileWriter(f));  
-                            
-                            
-                            bw.write(song.getSong());
-                            bw.close();
-                            makeSongFile("cancion",song.getSong());
-                            
 
-                            
-                            
-                            
-                                    
+                            makeSongFile(song.getTitle()+".mp3",song.getSong());
+       
                             break;
                             
                         case "play":
                             
                             output.writeUTF("send");
                             
+                            
+                            //Busca la cancion enviada desde el cliente
+//                            InputStream playInput = socket.getInputStream();
+//                            
+//                            String nameSon = currentUser.getSongsList().findV(readMessage(playInput));
+//                            File filee = new File(pathUsers+"/Dan/"+nameSon+".mp3");
+                            
+                            
+                            File file = new File(pathUsers+"/Dan/Welcom to the Jungle.mp3");
+                            
                             InputStream playInput = socket.getInputStream();
-                            
-
-                            
-                            File file = new File(pathUsers+"/Dan/cancion");
-                            
                             if(readMessage(playInput).equals("len")){
-                                output.writeUTF( String.valueOf(file.length())   );
+                                
+                            long indice = 50000;
+                            long veces = file.length()/indice;
+                            long ultimo = file.length() - veces*indice;                                
+                                
+                                
+                                output.writeUTF( String.valueOf("-"+file.length()+"@"+String.valueOf(veces)+"@"+String.valueOf(ultimo)));
                             }                              
                             
                             
                             
                             
+
+
                             
                             InputStream fileInput = new FileInputStream(file);
                             
                             BufferedInputStream bf = new BufferedInputStream(fileInput);
                             
-                            byte[] nuevo = new byte [12002];
+                            byte[] nuevo = new byte [50000];
                             
-      
+                                                          
+
                             int byteread = 0;
                             int cc = 0;
                             while(( byteread = fileInput.read(nuevo,0,nuevo.length) ) != -1  ){
                                 
-//                                String mierda = readMessage(playInput);
-                                
-//                                if(mierda.equals("chunk")){
+
                                     System.out.println(cc);
                                     output.write(nuevo,0,byteread);
-                                    cc++;
-//                                }
-                               
+                                  cc++;                              
                                 
                             }
                             break;
@@ -334,24 +349,32 @@ public class Server implements Runnable {
                 BufferedReader rr = new BufferedReader(
                         new FileReader(pathUsers+"/"+b[i]+"/Songs.txt"));
                 
-//                if(rr.readLine() != null){
-//                JSONObject jlist = new JSONObject(rr.readLine());
-//                int cont = jlist.getInt("NUMBER");
-//                for(int j = 1 ; j< cont ; j++){
-//                    
-//                JSONObject jsong = jlist.getJSONObject("SONGS").getJSONObject("Song"+j);
-//                currentUser.getSongsList().add(jsong.getString("song"), 
-//                                                jsong.getString("title"), 
-//                                                jsong.getString("artist"), 
-//                                                jsong.getString("album"), 
-//                                                jsong.getInt("year"), 
-//                                                jsong.getString("lyrics"), 
-//                                                jsong.getString("genre"));
-//                }
-//
-//                
-//                
-//                }
+                
+                
+                String songs = rr.readLine();
+                
+                if(songs!= null){
+                JSONObject jlist = new JSONObject(songs);
+                int cont = jlist.getInt("NUMBER");
+                for(int j = 1 ; j< cont ; j++){
+                    
+                JSONObject jlll = new JSONObject(jlist.getString("SONGS"));
+                JSONObject jsong = new JSONObject(jlll.getString("Song"+j));
+   
+                
+                usersTree.getUser(b[i]).getSongsList().add(jsong.getString("song"), 
+                                                jsong.getString("title"), 
+                                                jsong.getString("artist"), 
+                                                jsong.getString("album"), 
+                                                jsong.getInt("year"), 
+                                                jsong.getString("lyrics"), 
+                                                jsong.getString("genre"));
+                }
+
+                
+                
+                }
+                
              }
              }
           

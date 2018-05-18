@@ -20,27 +20,31 @@ public class ArbolSplay{
          root = null;
      }
  
-     /** Function to check if tree is empty **/
+     /** verifica si el arbol está vacio **/
      public boolean isEmpty()
      {
          return root == null;
      }
  
-     /** clear tree **/
+     /** limpia el arbol **/
      public void clear()
      {
          root = null;
      }
  
-     /** function to insert element */
-     public void insert(int ele)
+     /** insertar nodo
+      * 
+      * @param ele 
+      */
+      
+     public void insert(String ele)
      {
          NodoSplay z = root;
          NodoSplay p = null;
          while (z != null)
          {
              p = z;
-             if (ele < p.llave)
+             if (convertTOBytes(ele) <convertTOBytes( p.llave))
                  z = z.right;
              else
                  z = z.left;
@@ -50,14 +54,18 @@ public class ArbolSplay{
          z.parent = p;
          if (p == null)
              root = z;
-         else if (ele < p.llave)
+         else if (convertTOBytes(ele) <convertTOBytes( p.llave))
              p.right = z;
          else
              p.left = z;
          Splay(z);
          count++;
      }
-     /** rotate left **/
+     /** rotacion a la izquierda
+      * 
+      * @param c
+      * @param p 
+      */
      public void makeLeftChildParent(NodoSplay c, NodoSplay p)
      {
          if ((c == null) || (p == null) || (p.left != c) || (c.parent != p))
@@ -79,8 +87,11 @@ public class ArbolSplay{
          c.right = p;
      }
  
-     /** rotate rigth
-      .**/
+     /**rotacion a la derecha
+      * 
+      * @param c
+      * @param p 
+      */
      public void makeRightChildParent(NodoSplay c, NodoSplay p)
      {
          if ((c == null) || (p == null) || (p.right != c) || (c.parent != p))
@@ -100,7 +111,10 @@ public class ArbolSplay{
          c.left = p;
      }
  
-     /** function splay **/
+     /** metodo splay
+      * 
+      * @param x 
+      */
      private void Splay(NodoSplay x)
      {
          while (x.parent != null)
@@ -147,14 +161,20 @@ public class ArbolSplay{
          root = x;
      }
  
-     /** function to remove element **/
-     public void remove(int ele)
+     /** elimina elemento del arbol
+      * 
+      * @param ele 
+      */
+     public void remove(String ele)
      {
          NodoSplay node = findNode(ele);
         remove(node);
      }
  
-     /** function to remove node **/
+     /** elimina nodo del arbol
+      * 
+      * @param node 
+      */
      private void remove(NodoSplay node)
      {
          if (node == null)
@@ -193,25 +213,32 @@ public class ArbolSplay{
          count--;
      }
  
-     /** Functions to count number of nodes **/
+     /** nos permite contar los nodos del arbol
+      * 
+      * @return 
+      */
      public int countNodes()
      {
          return count;
      }
  
-     /** Functions to search for an element **/
-     public boolean search(int val)
+     /** funcion para buscar elemento
+      * 
+      * @param val
+      * @return elemento encontrado
+      */
+     public boolean search(String val)
      {
          return findNode(val) != null;
      }
-     private NodoSplay findNode(int ele)
+     private NodoSplay findNode(String ele)
      {
          NodoSplay z = root;
          while (z != null)
          {
-             if (ele < z.llave)
+             if (convertTOBytes(ele) < convertTOBytes( z.llave))
                  z = z.right;
-             else if (ele > z.llave)
+             else if (convertTOBytes(ele) > convertTOBytes( z.llave))
                  z = z.left;
              else
                  return z;
@@ -219,7 +246,9 @@ public class ArbolSplay{
          return null;
      }
  
-     /** Function for inorder traversal **/ 
+     /** recorrido innorden
+      * 
+      */
      public void inorder()
      {
          inorder(root);
@@ -234,7 +263,9 @@ public class ArbolSplay{
          }
      }
  
-     /** Function for preorder traversal **/
+     /** recorrido preorder
+      * 
+      */
      public void preorder()
      {
          preorder(root);
@@ -249,7 +280,9 @@ public class ArbolSplay{
          }
      }
  
-     /** Function for postorder traversal **/
+     /** recorrido postorden
+      * 
+      */
      public void postorder()
      {
          postorder(root);
@@ -262,15 +295,28 @@ public class ArbolSplay{
              postorder(r.right);
              System.out.print(r.llave +" ");
          }
-     }     
+     }
+     
+ /**FUNCION STRING = NUMERO PARA ARBOLES
+  * 
+  * @param id
+  * @return entero del string solicitado
+  */
+        public int convertTOBytes(String id){
+            int cont = 0;
+            for(int i = 0 ; i<id.length();i++){
+                cont+= (byte)id.charAt(i);   
+            }return cont;               
+        }      
+        
      
      public class NodoSplay {
          public NodoSplay left, right, parent;
-         public int llave;
+         public String llave;
  
      
      /** Constructor **/
-     public NodoSplay(int ele)
+     public NodoSplay(String ele)
      {
          left = null;
          right = null;
