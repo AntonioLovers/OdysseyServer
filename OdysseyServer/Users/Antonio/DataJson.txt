@@ -1,1 +1,0 @@
-{"password":"noseremolacha1234","genres":"Rap","name":"Toￃﾱo","id":"Antonio","age":15,"friends":"DaniC@Garza@pabloesgay@PrepucioZILLA","lastname":"Gonzalez"}

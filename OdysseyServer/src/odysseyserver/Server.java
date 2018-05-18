@@ -7,6 +7,7 @@ package odysseyserver;
  */
 //import Server.Server;
 import ADT.BinarySearch_Tree;
+import ADT.ObjectSong;
 import ADT.User;
 import Receivers.Song;
 import Receivers.logu;
@@ -107,7 +108,7 @@ public class Server implements Runnable {
                                     
                                     if(readMessage(loginInput).equals("list")){
                                         String send = "*";
-                                        Song temp = currentUser.getSongsList().getHead();
+                                        ObjectSong temp = currentUser.getSongsList().getHead();
                                         
                                         
                                         while(temp.getNext()!=null){
@@ -214,7 +215,7 @@ public class Server implements Runnable {
                             
                             Song song = JAXB.unmarshal(new StringReader(chunks), Song.class);
                             
-                            currentUser.getSongsList().add(song.getSong(), song.getTitle(),
+                            currentUser.getSongsList().add( song.getTitle(),
                                     song.getArtist(), song.getAlbum(), song.getYear(), song.getLetra(), song.getGenre());
 //                            System.out.println(song.getSong());
 //                            System.out.println(song.getTitle());
@@ -289,7 +290,7 @@ public class Server implements Runnable {
                             
                             String songFinder = readMessage(findInput);
                             //otra manera haciendo la busqueda en la carpeta y convirtiendo el file en base64
-                            usersTree.getUser(currentUser.getId()).getSongsList().getNode(songFinder).getSong();
+                            usersTree.getUser(currentUser.getId()).getSongsList().getNode(songFinder).getTitle();
                             
                             
                             break;  
@@ -362,7 +363,7 @@ public class Server implements Runnable {
                 JSONObject jsong = new JSONObject(jlll.getString("Song"+j));
    
                 
-                usersTree.getUser(b[i]).getSongsList().add(jsong.getString("song"), 
+                usersTree.getUser(b[i]).getSongsList().add( 
                                                 jsong.getString("title"), 
                                                 jsong.getString("artist"), 
                                                 jsong.getString("album"), 
@@ -434,11 +435,11 @@ public class Server implements Runnable {
                             
                             JSONObject finalJson = new JSONObject();
                             JSONObject jsonSongsList = new JSONObject();
-                            Song temp = currentUser.getSongsList().getHead();
+                            ObjectSong temp = currentUser.getSongsList().getHead();
                             int cont = 1;
                             while(temp!= null){
                                 JSONObject jsonSong = new JSONObject();
-                                jsonSong.put("song",temp.getSong());
+                                
                                 jsonSong.put("title",temp.getTitle());
                                 jsonSong.put("artist",temp.getArtist());
                                 jsonSong.put("album",temp.getAlbum());

@@ -1,1 +1,0 @@
-{"password":"pingapingapinga","genres":"Rock@Rap@Classic","name":"Pinga","id":"PrepucioZILLA","age":69,"friends":"DaniC@Garza@HIJUEPUTA","lastname":"Gonzalez"}

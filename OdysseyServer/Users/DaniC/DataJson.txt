@@ -1,1 +1,0 @@
-{"password":"pene01","genres":"Rock","name":"Daniel","id":"DaniC","age":18,"friends":"Daniel","lastname":"Camacho"}

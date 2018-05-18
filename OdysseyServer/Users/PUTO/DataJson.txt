@@ -1,1 +1,0 @@
-{"password":"123","genres":"Metal","name":"PU","id":"PUTO","age":12,"friends":"pabloesgay@Antonio","lastname":"TO"}

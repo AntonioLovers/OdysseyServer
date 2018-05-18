@@ -1,6 +1,6 @@
 package ADT;
 
-import Receivers.Song;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -13,7 +13,7 @@ import Receivers.Song;
  * @author Daniel
  */
 public class LinkedList_S {
-    protected Song head;
+    protected ObjectSong head;
     protected int size;
     
     
@@ -24,7 +24,7 @@ public class LinkedList_S {
         this.head = null;
         this.size = 0;
     }
-    public Song getHead(){
+    public ObjectSong getHead(){
         return this.head;
     }
     /**
@@ -37,9 +37,9 @@ public class LinkedList_S {
      * @param genero
      * @param artist
      */
-    public void add(String song ,String name, String artist , String album , 
+    public void add(String name, String artist , String album , 
             int age , String letra,String genero){
-        this.ad( song , name,  artist ,  album , 
+        this.ad( name,  artist ,  album , 
              age ,  letra, genero);
     }
 
@@ -87,8 +87,8 @@ public class LinkedList_S {
      * @param value - valor para identificar al Node
      * @return - retorna la referencia al Node
      */
-    public Song getNode(String value){
-        Song r = this.findNode(value);
+    public ObjectSong getNode(String value){
+        ObjectSong r = this.findNode(value);
         return r;
     }
     /**
@@ -96,24 +96,24 @@ public class LinkedList_S {
      * @param index - Posición de la cual sacar la referencia
      * @return - retorna la referencia al Node
      */
-    public Song getNodeI(int index){
-        Song r = this.findNodeI(index);
+    public ObjectSong getNodeI(int index){
+        ObjectSong r = this.findNodeI(index);
         return r;
     }
     /**
      * añade al final de la lista
      * @param value - valor a añadir
      */
-    private void ad(String song ,String name, String artist , String album , 
+    private void ad(String name, String artist , String album , 
             int age , String letra,String genero){
         if(isEmpty()){
-            head = new Song( song , name,  artist ,  album , 
+            head = new ObjectSong(  name,  artist ,  album , 
              age ,  letra, genero);
         }else{
-        Song temp = head;
+        ObjectSong temp = head;
         while(temp.getNext()!=null){
             temp = temp.getNext();
-        }Song ultimo = new Song( song , name,  artist ,  album , 
+        }ObjectSong ultimo = new ObjectSong( name,  artist ,  album , 
              age ,  letra, genero);
          temp.setNext(ultimo);}
          size++;
@@ -126,7 +126,7 @@ public class LinkedList_S {
      * @return - Hasta que el valor coincida retorna los datos
      */
     private String fdV(String value){
-        Song temp = head;
+        ObjectSong temp = head;
         
         while(temp.getTitle()!=value){
             temp = temp.getNext();
@@ -144,7 +144,7 @@ public class LinkedList_S {
             
         }else{
         int cont = 0;
-        Song temp = head;
+        ObjectSong temp = head;
  
         while(cont<=index){
             if(cont==index){
@@ -164,9 +164,9 @@ public class LinkedList_S {
      * @param value - parametro para que reconozca el nodo
      * @return - retorna la referencia al nodo
      */
-        private Song findNode(String value){
+        private ObjectSong findNode(String value){
 
-        Song temp = head;
+        ObjectSong temp = head;
         
         while(temp.getTitle()!=value){
             temp = temp.getNext();
@@ -180,10 +180,10 @@ public class LinkedList_S {
          * @param index - cantidad de veces a iterar
          * @return - retorna la referencia al Node 
          */
-        private Song findNodeI(int index){
+        private ObjectSong findNodeI(int index){
     
         int cont = 0;
-        Song temp = head;
+        ObjectSong temp = head;
  
         while(cont<=index){
             if(cont==index){
@@ -211,7 +211,7 @@ public class LinkedList_S {
      */
     private void se(){
         
-        Song temp = head;
+        ObjectSong temp = head;
         System.out.print("[");
         while(temp.getNext()!=null){
             System.out.print(String.valueOf(temp.getTitle())+",");
@@ -223,7 +223,7 @@ public class LinkedList_S {
      * @param value - valor a encontrar y eliminar
      */
     private void del(String value){
-        Song temp = head;
+        ObjectSong temp = head;
         if(value.equals(temp.getTitle())){
             head = temp.getNext();
         }else{
@@ -241,7 +241,7 @@ public class LinkedList_S {
         if(index == 0){
             head = head.getNext();
         }else{
-            Song temp = head;
+            ObjectSong temp = head;
             int cont = 0;
             while(cont < index-1){
                 temp = temp.getNext();
